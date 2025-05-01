@@ -57,168 +57,55 @@ void resultados(char nombres[MAX_COMPETIDORES][30], int ganador[llaves], int sig
 {
     int puntos, opc, val;
     int resu;
+    int combates[3][2] = {{0, 1}, {2, 3}, {4, 5}};
 
-    printf("Ingrese quien gano %s entre %s\n", nombres[0], nombres[1]);
-    printf("1. Para %s\n", nombres[0]);
-    printf("2. Para %s\n", nombres[1]);
-    printf(">> ");
-
-    do
+    for (int i = 0; i < llaves; i++)
     {
-        val = scanf("%d", &resu);
-        if (resu != 1 && resu != 2 || val !=1)
+        int a = combates[i][0];
+        int b = combates[i][1];
+
+        printf("Ingrese quien gano entre %s y %s\n", nombres[a], nombres[b]);
+        printf("1. Para %s\n", nombres[a]);
+        printf("2. Para %s\n", nombres[b]);
+        printf(">> ");
+
+        do
         {
-            printf("Entrada no válida. Por favor ingrese 1 o 2.\n");
-            fflush(stdin);
+            val = scanf("%d", &resu);
+            if ((resu != 1 && resu != 2) || val != 1)
+            {
+                printf("Entrada no válida. Por favor ingrese 1 o 2.\n");
+                fflush(stdin);
+            }
+        } while ((resu != 1 && resu != 2) || val != 1);
+
+        printf("¿Cuántos puntos ganó?\n>> ");
+        do
+        {
+            val = scanf("%d", &opc);
+            if (val != 1 || opc < 1)
+            {
+                printf("Error, ingrese un número válido mayor que 0.\n");
+                fflush(stdin);
+            }
+        } while (val != 1 || opc < 1);
+
+        if (resu == 1)
+        {
+            sigRonda[a] += opc;
+            ganador[i] = a;  // Guardar el índice del ganador
         }
-    } while (resu != 1 && resu != 2 || val !=1);
-  
-    if (resu == 1)
-    {
-        printf("Por cuantos puntos? \n");
-        printf(">> ");
-
-        do
+        else
         {
-            val = scanf("%d", &opc);
-
-            if (val!=1 || opc <1)
-            {
-                printf("Error\n");
-            }
-            
-            sigRonda[0] += opc;
-        } while (val!=1 || opc <1);
-        
-        
-        
-    }
-    else if (resu == 2)
-    {
-        printf("Por cuantos puntos? \n");
-        printf(">> ");
-
-        do
-        {
-            val = scanf("%d", &opc);
-
-            if (val!=1 || opc <1)
-            {
-                printf("Error\n");
-            }
-            
-            sigRonda[1] += opc;
-        } while (val!=1 || opc <1);
-    }
-
-    printf("Ingrese quien gano %s entre %s\n", nombres[2], nombres[3]);
-    printf("1. Para %s\n", nombres[2]);
-    printf("2. Para %s\n", nombres[3]);
-    printf(">> ");
-   
-    do
-    {
-        val = scanf("%d", &resu);
-        if (resu != 1 && resu != 2 || val !=1)
-        {
-            printf("Entrada no válida. Por favor ingrese 1 o 2.\n");
-            fflush(stdin);
+            sigRonda[b] += opc;
+            ganador[i] = b;  // Guardar el índice del ganador
         }
-    } while (resu != 1 && resu != 2 || val !=1);
-  
-    if (resu == 1)
-    {
-        printf("Por cuantos puntos? \n");
-        printf(">> ");
-
-        do
-        {
-            val = scanf("%d", &opc);
-
-            if (val!=1 || opc <1)
-            {
-                printf("Error\n");
-            }
-            
-            sigRonda[2] += opc;
-
-        } while (val!=1 || opc <1);
-    }
-    else if (resu == 2)
-    {
-        printf("Por cuantos puntos? \n");
-        printf(">> ");
-
-        do
-        {
-            val = scanf("%d", &opc);
-
-            if (val!=1 || opc <1)
-            {
-                printf("Error\n");
-            }
-            
-            sigRonda[3] += opc;
-        } while (val!=1 || opc <1);
-    }
-
-    printf("Ingrese quien gano %s entre %s\n", nombres[4], nombres[5]);
-    printf("1. Para %s\n", nombres[4]);
-    printf("2. Para %s\n", nombres[5]);
-    printf(">> ");
-    
-    do
-    {
-        val = scanf("%d", &resu);
-        if (resu != 1 && resu != 2 || val !=1)
-        {
-            printf("Entrada no válida. Por favor ingrese 1 o 2.\n");
-            fflush(stdin);
-        }
-    } while (resu != 1 && resu != 2 || val !=1);
-  
-
-    if (resu == 1)
-    {
-        printf("Por cuantos puntos? \n");
-        printf(">> ");
-
-        do
-        {
-            val = scanf("%d", &opc);
-
-            if (val!=1 || opc <1)
-            {
-                printf("Error\n");
-            }
-            
-            sigRonda[4] += opc;
-
-        } while (val!=1 || opc <1);
-    }
-    else if (resu == 2)
-    {
-       printf("Por cuantos puntos? \n");
-        printf(">> ");
-
-        do
-        {
-            val = scanf("%d", &opc);
-
-            if (val!=1 || opc <1)
-            {
-                printf("Error\n");
-            }
-            
-            sigRonda[5] += opc;
-
-        } while (val!=1 || opc <1);
     }
 }
 
+
 void finalistas(char nombres[MAX_COMPETIDORES][30], int sigRonda[MAX_COMPETIDORES], int ganador[llaves])
 {
-    // Ordenamos los finalistas por puntos y en caso de empate, por el orden de la llave
     for (int i = 0; i < llaves - 1; i++)
     {
         for (int j = 0; j < llaves - i - 1; j++)
@@ -226,8 +113,8 @@ void finalistas(char nombres[MAX_COMPETIDORES][30], int sigRonda[MAX_COMPETIDORE
             int p1 = ganador[j];
             int p2 = ganador[j + 1];
 
-            if (sigRonda[p1] < sigRonda[p2] || 
-               (sigRonda[p2] == sigRonda[p2] && ganador[j] < ganador[j + 1])) 
+            if (sigRonda[p1] < sigRonda[p2] ||
+               (sigRonda[p1] == sigRonda[p2] && p1 > p2))
             {
                 int temp = ganador[j];
                 ganador[j] = ganador[j + 1];
@@ -237,8 +124,8 @@ void finalistas(char nombres[MAX_COMPETIDORES][30], int sigRonda[MAX_COMPETIDORE
     }
 
     printf("Los finalistas son:\n");
-    printf("1. %s con %d puntos \n", nombres[ganador[0]], sigRonda[ganador[0]]);
-    printf("2. %s con %d puntos \n", nombres[ganador[1]], sigRonda[ganador[1]]);
+    printf("1. %s con %d puntos\n", nombres[ganador[0]], sigRonda[ganador[0]]);
+    printf("2. %s con %d puntos\n", nombres[ganador[1]], sigRonda[ganador[1]]);
 }
 
 void granFinal(char nombres[MAX_COMPETIDORES][30], int ganador[llaves])
@@ -255,7 +142,7 @@ void granFinal(char nombres[MAX_COMPETIDORES][30], int ganador[llaves])
         printf(">> ");
         val = scanf("%d", &resu);
 
-        if (resu != 1 && resu != 2 || val!=0)
+        if ((resu != 1 && resu != 2) || val != 1)
         {
             printf("Entrada no válida. Intente de nuevo.\n");
         }
