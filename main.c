@@ -74,18 +74,18 @@ void resultados(char nombres[MAX_COMPETIDORES][30], int ganador[llaves], int sig
             val = scanf("%d", &resu);
             if ((resu != 1 && resu != 2) || val != 1)
             {
-                printf("Entrada no válida. Por favor ingrese 1 o 2.\n");
+                printf("Entrada no valida. Por favor ingrese 1 o 2.\n");
                 fflush(stdin);
             }
         } while ((resu != 1 && resu != 2) || val != 1);
 
-        printf("¿Cuántos puntos ganó?\n>> ");
+        printf("Cuntos puntos gano?\n>> ");
         do
         {
             val = scanf("%d", &opc);
             if (val != 1 || opc < 1)
             {
-                printf("Error, ingrese un número válido mayor que 0.\n");
+                printf("Error, ingrese un numero valido mayor que 0.\n");
                 fflush(stdin);
             }
         } while (val != 1 || opc < 1);
@@ -136,27 +136,27 @@ void granFinal(char nombres[MAX_COMPETIDORES][30], int ganador[llaves])
 
     do
     {
-        printf("Ingrese quien ganó entre %s y %s\n", nombres[finalista1], nombres[finalista2]);
+        printf("Ingrese quien gano entre %s y %s\n", nombres[finalista1], nombres[finalista2]);
         printf("1. Para %s\n", nombres[finalista1]);
         printf("2. Para %s\n", nombres[finalista2]);
         printf(">> ");
-        
+
         fflush(stdin);
         val = scanf("%d", &resu);
 
         if ((resu != 1 && resu != 2) || val != 1)
         {
-            printf("Entrada no válida. Intente de nuevo.\n");
+            printf("Entrada no valida. Intente de nuevo.\n");
         }
     } while (resu != 1 && resu != 2);
 
     if (resu == 1)
     {
-        printf("¡Felicidades %s, ganaste el torneo!\n", nombres[finalista1]);
+        printf("Felicidades %s, ganaste el torneo!\n", nombres[finalista1]);
     }
     else
     {
-        printf("¡Felicidades %s, ganaste el torneo!\n", nombres[finalista2]);
+        printf("Felicidades %s, ganaste el torneo!\n", nombres[finalista2]);
     }
 }    
 
