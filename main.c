@@ -211,36 +211,23 @@ void resultados(char nombres[MAX_COMPETIDORES][30], int ganador[llaves], int sig
             }
             
             sigRonda[5] += opc;
-            
+
         } while (val!=1 || opc <1);
     }
 }
 
 void finalistas(char nombres[MAX_COMPETIDORES][30], int sigRonda[MAX_COMPETIDORES], int ganador[llaves])
 {
-    // Asignamos los ganadores de cada llave
-    for (int i = 0; i < llaves; i++)
-    {
-        if (sigRonda[i * 2] > sigRonda[i * 2 + 1])
-        {
-            ganador[i] = i * 2;
-        }
-        else
-        {
-            ganador[i] = i * 2 + 1;
-        }
-    }
-
     // Ordenamos los finalistas por puntos y en caso de empate, por el orden de la llave
     for (int i = 0; i < llaves - 1; i++)
     {
         for (int j = 0; j < llaves - i - 1; j++)
         {
-            int idx1 = ganador[j];
-            int idx2 = ganador[j + 1];
+            int p1 = ganador[j];
+            int p2 = ganador[j + 1];
 
-            if (sigRonda[idx1] < sigRonda[idx2] || 
-               (sigRonda[idx1] == sigRonda[idx2] && ganador[j] < ganador[j + 1])) 
+            if (sigRonda[p1] < sigRonda[p2] || 
+               (sigRonda[p2] == sigRonda[p2] && ganador[j] < ganador[j + 1])) 
             {
                 int temp = ganador[j];
                 ganador[j] = ganador[j + 1];
@@ -256,7 +243,7 @@ void finalistas(char nombres[MAX_COMPETIDORES][30], int sigRonda[MAX_COMPETIDORE
 
 void granFinal(char nombres[MAX_COMPETIDORES][30], int ganador[llaves])
 {
-    int resu;
+    int resu, val;
     int finalista1 = ganador[0];
     int finalista2 = ganador[1];
 
@@ -266,9 +253,9 @@ void granFinal(char nombres[MAX_COMPETIDORES][30], int ganador[llaves])
         printf("1. Para %s\n", nombres[finalista1]);
         printf("2. Para %s\n", nombres[finalista2]);
         printf(">> ");
-        scanf("%d", &resu);
+        val = scanf("%d", &resu);
 
-        if (resu != 1 && resu != 2)
+        if (resu != 1 && resu != 2 || val!=0)
         {
             printf("Entrada no válida. Intente de nuevo.\n");
         }
