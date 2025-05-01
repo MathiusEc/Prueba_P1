@@ -47,7 +47,7 @@ void ingresarNombres(char nombres[][30], int n)
 
         if (strlen(nombres[i]) == 0)
         {
-            printf("Error: Nombre de competidor no puede estar vacío. Inténtelo de nuevo.\n");
+            printf("Error: Nombre de competidor no puede estar vacio. Intentelo de nuevo.\n");
             i--; // Decrementar i para repetir la entrada
         }
     }
@@ -140,6 +140,8 @@ void granFinal(char nombres[MAX_COMPETIDORES][30], int ganador[llaves])
         printf("1. Para %s\n", nombres[finalista1]);
         printf("2. Para %s\n", nombres[finalista2]);
         printf(">> ");
+        
+        fflush(stdin);
         val = scanf("%d", &resu);
 
         if ((resu != 1 && resu != 2) || val != 1)
